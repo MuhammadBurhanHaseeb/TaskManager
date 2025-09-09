@@ -1,0 +1,31 @@
+# Logs (frontend)
+clienr-rec/logs
+clienr-rec/*.log
+clienr-rec/npm-debug.log*
+clienr-rec/yarn-debug.log*
+clienr-rec/yarn-error.log*
+clienr-rec/pnpm-debug.log*
+clienr-rec/lerna-debug.log*
+
+# Node / Build folders (frontend)
+clienr-rec/node_modules
+clienr-rec/dist
+clienr-rec/dist-ssr
+clienr-rec/*.local
+
+# Editor directories and files (frontend)
+clienr-rec/.vscode/*
+!clienr-rec/.vscode/extensions.json
+clienr-rec/.idea
+clienr-rec/.DS_Store
+clienr-rec/*.suo
+clienr-rec/*.ntvs*
+clienr-rec/*.njsproj
+clienr-rec/*.sln
+clienr-rec/*.sw?
+
+
+
+# Backend environment and virtual env
+server/.env
+server/.venv/
