@@ -1,9 +1,8 @@
 // src/api/api.js
 
 // const API_URL = "https://MuhammadBurhan.pythonanywhere.com";
-// const API_URL = "https://localhost:5000";
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 // Helper function for making API requests
 const request = async (url, method = "GET", body = null, token = null) => {

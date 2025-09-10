@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signupUser } from "../features/auth/authSlice";
+import { signupUser } from "@/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-
+import Button  from "@/components/atoms/Button.jsx";
+import Heading from "@/components/atoms/Heading";
+import Input from "@/components/atoms/Input";
+import Paragraph from "@/components/atoms/Paragraph";
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,33 +27,41 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
+    <Div
+    variant="RegisterPageMainDiv"
+    // className="p-6 max-w-md mx-auto"
+    >
+      {/* <h1 className="text-2xl font-bold mb-4">Register</h1> */}
+      <Heading  level={1} variant= "registerLogin" >Register</Heading>
       <form onSubmit={handleRegister} className="flex flex-col gap-3">
-        <input
+        <Input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="p-2 border rounded"
         />
-        <input
+        <Input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="p-2 border rounded"
         />
-        <button
+        <Button
           type="submit"
           disabled={loading}
-          className="bg-green-500 text-white p-2 rounded"
+          // className="bg-green-500 text-white p-2 rounded"
+          variant="RegisterButton"
         >
           {loading ? "Registering..." : "Register"}
-        </button>
+        </Button>
       </form>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-    </div>
+      {error && <Paragraph 
+      variant ="Error"
+      // className="text-red-500 mt-2"
+      >{error}</Paragraph>}
+    </Div>
   );
 };
 

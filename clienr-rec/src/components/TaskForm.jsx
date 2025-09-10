@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, updateTask } from "../features/tasks/taskSlice";
+import { addTask, updateTask } from "@/features/tasks/taskSlice";
+import Button from "@/components/atoms/Button";
+import Input from "@/components/atoms/Input";
+import TextArea from "@/components/atoms/TextArea";
+import Label from "@/components/atoms/Label";
+import Div from "@/components/atoms/Div";
+
 
 const TaskForm = ({ editTask, setEditTask }) => {
   const [title, setTitle] = useState("");
@@ -38,47 +44,54 @@ const TaskForm = ({ editTask, setEditTask }) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 border rounded flex flex-col gap-2">
-      <input
+      <Input
         type="text"
         placeholder="Title"
-        className="border p-2 rounded"
+        variant="TaskFormInputsTitle"
+        // className="border p-2 rounded"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
       />
 
-      <textarea
+      <TextArea
         placeholder="Description"
-        className="border p-2 rounded"
+        variant="TaskFormTextArea"
+        rows = "2"
+        // className="border p-2 rounded"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
       />
 
-      <div className="flex gap-4">
-        <label>
-          <input
+      <Div  variant=""  
+      className="flex gap-4">
+        <Label>
+          <Input
             type="radio"
             value="pending"
             checked={status === "pending"}
             onChange={() => setStatus("pending")}
           />{" "}
           Pending
-        </label>
-        <label>
-          <input
+        </Label>
+        <Label>
+          <Input
             type="radio"
             value="completed"
             checked={status === "completed"}
             onChange={() => setStatus("completed")}
           />{" "}
           Completed
-        </label>
-      </div>
+        </Label>
+      </Div>
 
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <Button type="submit" 
+      // className="bg-blue-500 text-white px-4 py-2 rounded"
+      variant="TaskAddUpdatetask"
+      >
         {editTask ? "Update Task" : "Add Task"}
-      </button>
+      </Button>
     </form>
   );
 };

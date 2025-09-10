@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { manualLogout } from "../features/auth/authSlice";
+import { manualLogout } from "@/features/auth/authSlice";
 
 export default function TopLevelSessionChecker() {
   const dispatch = useDispatch();

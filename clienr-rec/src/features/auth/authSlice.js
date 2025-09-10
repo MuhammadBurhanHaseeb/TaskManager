@@ -1,6 +1,6 @@
 // src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signupApi, loginApi, logoutApi } from "../../api/api";
+import { signupApi, loginApi, logoutApi } from "@/api/index";
 
 // ===== Signup Thunk =====
 export const signupUser = createAsyncThunk(

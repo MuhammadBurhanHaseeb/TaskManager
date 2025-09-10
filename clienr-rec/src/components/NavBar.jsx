@@ -1,8 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../features/auth/authSlice";
-
+import { logoutUser } from "@/features/auth/authSlice";
+import Button from "@/components/atoms/Button";
+import LinkButton from "@/components/atoms/LinkButton";
+import Heading from "@/components/atoms/Heading";
+import Div from "@/components/atoms/Div";
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,48 +17,58 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-green-600 shadow-md text-white p-4 flex justify-between items-center">
-      <h1 className="font-extrabold text-2xl tracking-wide">Task Manager</h1>
+    <nav className="bg-green-600 fixed top-0 w-full z-50 shadow-md  text-white p-4 flex justify-between items-center">
+      {/* <h1 className="font-extrabold text-2xl tracking-wide">Task Manager</h1> */}
+      <Heading  level={1} variant= "NavHead" >Task Manager</Heading>
 
-      <div className="space-x-4 flex items-center">
+      <Div 
+      variant ="NavBarDiv"
+      // className="space-x-4 flex items-center"
+      >
         {token ? (
           <>
-            <Link
+            <LinkButton
               to="/"
-              className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+              variant="NavDashboard"
+              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
             >
               Dashboard
-            </Link>
-            <Link
+            </LinkButton>
+            <LinkButton
               to="/tasks"
-              className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+              variant="NavTask"
+              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
             >
               Tasks
-            </Link>
-            <button
+            </LinkButton>
+            <Button
+            variant="NavLogout"
               onClick={handleLogout}
-              className="px-4 py-2 rounded-md hover:bg-red-600 transition-colors border border-white"
+
+              // className="px-4 py-2 rounded-md hover:bg-red-600 transition-colors border border-white"
             >
               Logout
-            </button>
+            </Button>
           </>
         ) : (
           <>
-            <Link
+            <LinkButton
               to="/login"
-              className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white"
+              variant ="NavLogin"
+              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white"
             >
               Login
-            </Link>
-            <Link
+            </LinkButton>
+            <LinkButton
               to="/register"
-              className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white"
+              variant="NavRegister"
+              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white"
             >
               Register
-            </Link>
+            </LinkButton>
           </>
         )}
-      </div>
+      </Div>
     </nav>
   );
 };

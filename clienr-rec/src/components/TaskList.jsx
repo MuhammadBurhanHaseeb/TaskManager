@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTask } from "../features/tasks/taskSlice";
+import { deleteTask } from "@/features/tasks/taskSlice";
+import Button from "@/components/atoms/Button";
+import Div from "@/components/atoms/Div";
+import Paragraph from "@/components/atoms/Paragraph";
 
 const TaskList = ({ onEdit }) => {
   const dispatch = useDispatch();
@@ -15,53 +18,72 @@ const TaskList = ({ onEdit }) => {
   });
 
   return (
-    <div className="border rounded overflow-hidden">
+    <Div 
+    variant="TaskListMainDiv"
+    // className="border rounded overflow-hidden"
+    >
       {/* 👈 Headers */}
-      <div className="grid grid-cols-4 bg-green-600 text-white font-bold p-2">
-        <div>Title</div>
-        <div>Description</div>
-        <div>Status</div>
-        <div>Actions</div>
-      </div>
+      <Div 
+      variant="TaskListColonHeaderMain"
+      // className="grid grid-cols-4 bg-green-600 text-white font-bold p-2"
+      >
+        <Div>Title</Div>
+        <Div>Description</Div>
+        <Div>Status</Div>
+        <Div>Actions</Div>
+      </Div>
 
       {/* 👈 Task items with scrolling */}
-      <div className="h-40 overflow-y-auto">
+      <Div 
+      variant ="TaskListMainDivv" 
+      //  className="h-40 overflow-y-auto"
+      >
         {filteredTasks.map((task) => (
-          <div
+          <Div
             key={task.id}
-            className="grid grid-cols-4 gap-2 p-2 border-b last:border-b-0 bg-white items-center"
+            variant ="TaskListInnerDiv"
+            // className="grid grid-cols-4 gap-2 p-2 border-b last:border-b-0 bg-white items-center"
           >
-            <div className="font-semibold">{task.title}</div>
-            <div>{task.description}</div>
-            <div
-              className={
-                task.status === "completed" ? "text-green-600" : "text-yellow-600"
-              }
+            <Div 
+            variant ="TaskListTitleDiv"
+            // className="font-semibold"
+            >{task.title}</Div>
+            <Div>{task.description}</Div>
+            <Div
+            variant={task.status === "completed" ? "GreenStatus" : "YellowStatus"}
+              // className={
+              //   task.status === "completed" ? "text-green-600" : "text-yellow-600"
+              // }
             >
               {task.status}
-            </div>
-            <div className="flex gap-2">
-              <button
+            </Div>
+            <Div 
+            variant ="TaskListEditDeleteDiv"  
+            // className="flex gap-2"
+            >
+              <Button
                 onClick={() => onEdit(task)}
-                className="bg-blue-500 text-white px-2 rounded"
+                // className="bg-blue-500 text-white px-2 rounded"
+                variant="EditTasklist"
               >
                 Edit
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => dispatch(deleteTask({ taskId: task.id, token }))}
-                className="bg-red-500 text-white px-2 rounded"
+                // className="bg-red-500 text-white px-2 rounded"
+                variant="DeleteTasklist"
               >
                 Delete
-              </button>
-            </div>
-          </div>
+              </Button>
+            </Div>
+          </Div>
         ))}
 
         {filteredTasks.length === 0 && (
-          <p className="text-gray-500 text-center mt-2">No tasks found</p>
+          <Paragraph className="text-gray-500 text-center mt-2">No tasks found</Paragraph>
         )}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 };
 

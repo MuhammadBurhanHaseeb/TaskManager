@@ -1,32 +1,45 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter } from "../features/tasks/taskSlice";
+import { setFilter } from "@/features/tasks/taskSlice";
+import Button from "@/components/atoms/Button";
+import Div from "@/components/atoms/Div";
 
 const FilterButtons = () => {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.tasks.filter);
 
+   const status = {
+    all: 'all',
+    completed: 'completed',
+    pending: 'pending',
+  }
+
+
   return (
-    <div className="flex gap-2 mb-4 mt-6">
-      <button
-        className={`p-2 rounded ${filter === "all" ? "bg-gray-500 text-white" : "bg-gray-300"}`}
-        onClick={() => dispatch(setFilter("all"))}
+    <Div 
+    variant ="FillterBtnsDiv"
+    // className="flex gap-2 mb-4 mt-6"
+    >
+      <Button
+         variant={filter === "all" ? "FillterAll" : "FillterNotAll"}
+        onClick={() => dispatch(setFilter(status.all))}
       >
         All
-      </button>
-      <button
-        className={`p-2 rounded ${filter === "completed" ? "bg-green-500 text-white" : "bg-green-300"}`}
-        onClick={() => dispatch(setFilter("completed"))}
+      </Button>
+      <Button
+        variant={filter === "completed" ? "FillterComplete" : "FillterNotComplete"}
+        onClick={() => dispatch(setFilter(status.completed))}
       >
         Completed
-      </button>
-      <button
-        className={`p-2 rounded ${filter === "pending" ? "bg-yellow-500 text-white" : "bg-yellow-300"}`}
-        onClick={() => dispatch(setFilter("pending"))}
+      </Button>
+      <Button
+
+        variant={filter === "pending" ? "FillterPending" : "FillterNotPending"}
+        onClick={() => dispatch(setFilter(status.pending))}
       >
         Pending
-      </button>
-    </div>
+      </Button>
+    </Div>
   );
 };
 

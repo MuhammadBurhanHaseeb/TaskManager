@@ -4,7 +4,7 @@ import {
   addTaskApi,
   updateTaskApi,
   deleteTaskApi,
-} from "../../api/api"; // adjust path if needed
+} from "@/api/index"; // adjust path if needed
 
 // Fetch tasks
 export const fetchTasks = createAsyncThunk(
