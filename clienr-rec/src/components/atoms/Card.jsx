@@ -1,6 +1,7 @@
 import React from "react";
 
-// 🔹 Base Card
+// 🔹Info:   Base Card
+// ToDo: for the future improvements 
 const baseCardStyles = "";
 
 const cardVariants = {

@@ -1,4 +1,3 @@
-// src/hooks/useSessionChecker.js
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,16 +13,17 @@ export const useSessionChecker = () => {
       if (token) {
         try {
           const payload = JSON.parse(atob(token.split(".")[1]));
+          // 🔹 Check if token expired
           if (Date.now() >= payload.exp * 1000) {
-            dispatch(manualLogout());
-            navigate("/login");
+            dispatch(manualLogout()); // Redux + localStorage cleanup
+            navigate("/login"); // Redirect to login
           }
         } catch {
           dispatch(manualLogout());
           navigate("/login");
         }
       }
-    }, 60000); //CheckingTime :  Every 60 sec check session 
+    }, 5000); // 🔹 5 sec interval for testing, production me 60000
 
     return () => clearInterval(interval);
   }, [dispatch, navigate]);

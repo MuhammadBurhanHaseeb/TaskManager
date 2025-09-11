@@ -1,4 +1,3 @@
-// src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { signupApi, loginApi, logoutApi } from "@/api/index";
 
@@ -21,7 +20,6 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await loginApi(email, password);
-      // response me token aayega
       return response;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -46,6 +44,7 @@ export const logoutUser = createAsyncThunk(
 const initialState = {
   user: null,
   token: localStorage.getItem("token") || null,
+  isAuthenticated: !!localStorage.getItem("token"), // 🔹 new
   loading: false,
   error: null,
 };
@@ -57,12 +56,13 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    manualLogout: (state) => {   // 🔹 new
-    state.user = null;
-    state.token = null;
-    state.error = null;
-    localStorage.removeItem("token");
-  },
+    manualLogout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false; // 🔹 update
+      state.error = null;
+      localStorage.removeItem("token");
+    },
   },
   extraReducers: (builder) => {
     // ===== Signup =====
@@ -73,8 +73,8 @@ const authSlice = createSlice({
     builder.addCase(signupUser.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload.user;
-      // Signup ke baad token save nahi hota, wo login ke baad hoga
       state.token = action.payload.access_token;
+      state.isAuthenticated = true; // 🔹 update
       localStorage.setItem("token", action.payload.access_token);
     });
     builder.addCase(signupUser.rejected, (state, action) => {
@@ -91,6 +91,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       state.token = action.payload.access_token;
+      state.isAuthenticated = true; // 🔹 update
       localStorage.setItem("token", action.payload.access_token);
     });
     builder.addCase(loginUser.rejected, (state, action) => {
@@ -102,10 +103,11 @@ const authSlice = createSlice({
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.user = null;
       state.token = null;
+      state.isAuthenticated = false; // 🔹 update
       localStorage.removeItem("token");
     });
   },
 });
 
-export const { clearError , manualLogout } = authSlice.actions;
+export const { clearError, manualLogout } = authSlice.actions;
 export default authSlice.reducer;

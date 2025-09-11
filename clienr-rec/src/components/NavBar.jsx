@@ -7,65 +7,41 @@ import LinkButton from "@/components/atoms/LinkButton";
 import Heading from "@/components/atoms/Heading";
 import Div from "@/components/atoms/Div";
 
-
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
-  const handleLogout = () => {
-    dispatch(logoutUser()); // Logout : Redux se logout
-    navigate("/login"); //Redirect : Login page per redirect after Logout 
-  };
-
+ const handleLogout = async () => {
+  try {
+    await dispatch(logoutUser()).unwrap(); // optional: backend logout
+  } catch (err) {
+    console.error("Logout failed:", err);
+  }
+  dispatch(manualLogout()); // Redux + localStorage cleanup
+  navigate("/login");
+};
   return (
-    <nav className="bg-green-600 fixed top-0 w-full z-50 shadow-md  text-white p-4 flex justify-between items-center">
-      <Heading  level={1} variant= "NavHead" >Task Manager</Heading>
+    <nav className="bg-green-600 fixed top-0 w-full z-50 shadow-md text-white p-4 flex justify-between items-center">
+      <Heading level={1} variant="NavHead">Task Manager</Heading>
 
-      <Div 
-      variant ="NavBarDiv"
-      >
-        {token ? (
+      <Div variant="NavBarDiv">
+        {isAuthenticated ? (
           <>
-            <LinkButton
-              to="/"
-              variant="NavDashboard"
-            >
-              Dashboard
-            </LinkButton>
-            <LinkButton
-              to="/tasks"
-              variant="NavTask"
-            >
-              Tasks
-            </LinkButton>
-            <Button
-            variant="NavLogout"
-              onClick={handleLogout}
-
-            >
-              Logout
-            </Button>
+            <LinkButton to="/" variant="NavDashboard">Dashboard</LinkButton>
+            <LinkButton to="/tasks" variant="NavTask">Tasks</LinkButton>
+            <Button variant="NavLogout" onClick={handleLogout}>Logout</Button>
           </>
         ) : (
           <>
-            <LinkButton
-              to="/login"
-              variant ="NavLogin"
-            >
-              Login
-            </LinkButton>
-            <LinkButton
-              to="/register"
-              variant="NavRegister"
-            >
-              Register
-            </LinkButton>
+            <LinkButton to="/login" variant="NavLogin">Login</LinkButton>
+            <LinkButton to="/register" variant="NavRegister">Register</LinkButton>
           </>
         )}
       </Div>
     </nav>
   );
 };
+
 
 export default Navbar;
