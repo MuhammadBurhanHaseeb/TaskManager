@@ -1,13 +1,14 @@
 // src/components/atoms/Label.jsx
 import React from "react";
-
-const Label = ({ htmlFor, children, variant = "primary", className = "", ...props }) => {
-  const baseClass = "block font-medium mb-1"; // basic label styling
+ const baseClass = "block font-medium mb-1"; // basic label styling
 
   const variants = {
     primary: "text-gray-800",
     
   };
+
+const Label = ({ htmlFor, children, variant = "primary", className = "", ...props }) => {
+ 
 
   return (
     <label

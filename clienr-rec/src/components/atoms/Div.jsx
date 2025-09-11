@@ -1,7 +1,6 @@
 // src/components/atoms/Div.jsx
 import React from "react";
 
-const Div = ({ children, variant = "primary", className = "", ...props }) => {
   const baseClass = ""; // common styles for all divs
 
   const variants = {
@@ -22,9 +21,12 @@ const Div = ({ children, variant = "primary", className = "", ...props }) => {
     MainContentDiv:"p-6 pt-22 space-y-8 max-w-6xl mx-auto ",
     MainContentInnerDiv:"grid grid-cols-1 md:grid-cols-3 gap-6",
     TaskPageMainDiv:"p-6 pt-26 max-w-3xl mx-auto",
-    RegisterPageMainDiv:"p-6 max-w-md mx-auto",
-    LoginPageMainDiv:"p-6 max-w-md mx-auto",
+    RegisterPageMainDiv:"p-6 pt-20 max-w-md mx-auto",
+    LoginPageMainDiv:"p-6 pt-20 max-w-md mx-auto",
   };
+
+
+const Div = ({ children, variant = "primary", className = "", ...props }) => {
 
   return (
     <div className={`${baseClass} ${variants[variant]} ${className}`} {...props}>

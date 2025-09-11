@@ -1,10 +1,8 @@
 // src/components/atoms/Button.jsx
 import React from "react";
 
-const Button = ({ children, variant = "primary", onClick, ...props }) => {
-//   const baseStyles =
-//     "rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
 const baseStyles="";
+
   const variants = {
     NavDashboard:"px-4 py-2 rounded-md hover:bg-green-700 transition-colors",
     NavTask:"px-4 py-2 rounded-md hover:bg-green-700 transition-colors",
@@ -27,6 +25,12 @@ const baseStyles="";
     LoginButton:"bg-green-500 text-white p-2 rounded",
     RegisterButton:"bg-green-500 text-white p-2 rounded",
   };
+
+
+const Button = ({ children, variant = "primary", onClick, ...props }) => {
+//   const baseStyles =
+//     "rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+
 
 //   const sizes = {
 //     sm: "px-3 py-1 text-sm",

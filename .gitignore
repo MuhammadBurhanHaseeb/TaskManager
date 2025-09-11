@@ -24,7 +24,8 @@ clienr-rec/*.njsproj
 clienr-rec/*.sln
 clienr-rec/*.sw?
 
-
+# Frontend environment and virtual env
+clienr-rec/.env
 
 # Backend environment and virtual env
 server/.env

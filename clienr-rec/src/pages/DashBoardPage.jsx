@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "@/features/tasks/taskSlice";
 import { Card, CardContent } from "@/components/ui/card";
 import Paragraph from "@/components/atoms/Paragraph";
-
+import { TaskStatus } from "@/enums/TaskStatus"; 
 import { CheckCircle, Clock, ListTodo } from "lucide-react";
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
@@ -24,12 +24,12 @@ const Dashboard = () => {
 
  // 🔹 useMemo for derived data
   const completedTasks = useMemo(
-    () => tasks.filter((t) => t.status === "completed"),
+    () => tasks.filter((t) => t.status === TaskStatus.Completed),
     [tasks]
   );
 
   const pendingTasks = useMemo(
-    () => tasks.filter((t) => t.status === "pending"),
+    () => tasks.filter((t) => t.status === TaskStatus.Pending),
     [tasks]
   );
 
@@ -40,8 +40,8 @@ const Dashboard = () => {
 
   const chartData = useMemo(
     () => [
-      { name: "Completed", value: completedTasks.length },
-      { name: "Pending", value: pendingTasks.length },
+      { name: TaskStatus.Completed, value: completedTasks.length },
+      { name: TaskStatus.Pending, value: pendingTasks.length },
     ],
     [completedTasks.length, pendingTasks.length]
   );
@@ -173,7 +173,7 @@ const Dashboard = () => {
                     </td>
                     <td
                       className={`p-3 border-b font-semibold ${
-                        task.status === "completed"
+                        task.status === TaskStatus.Completed
                           ? "text-green-600"
                           : "text-yellow-600"
                       }`}

@@ -1,8 +1,6 @@
 // src/components/atoms/Paragraph.jsx
 import React from "react";
-
-const Paragraph = ({ children, variant = "primary", className = "", ...props }) => {
-  const baseClass = ""; // base text size and line height
+const baseClass = ""; // base text size and line height
 
   const variants = {
     Error: "text-red-500 mt-2",
@@ -12,6 +10,10 @@ const Paragraph = ({ children, variant = "primary", className = "", ...props }) 
     
   };
 
+
+
+const Paragraph = ({ children, variant = "primary", className = "", ...props }) => {
+  
   return (
     <p className={`${baseClass} ${variants[variant]} ${className}`} {...props}>
       {children}

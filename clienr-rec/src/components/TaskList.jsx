@@ -4,6 +4,7 @@ import { deleteTask } from "@/features/tasks/taskSlice";
 import Button from "@/components/atoms/Button";
 import Div from "@/components/atoms/Div";
 import Paragraph from "@/components/atoms/Paragraph";
+import { TaskStatus } from "@/enums/TaskStatus"; 
 
 const TaskList = ({ onEdit }) => {
   const dispatch = useDispatch();
@@ -12,8 +13,8 @@ const TaskList = ({ onEdit }) => {
 
   // 🔹 Filter tasks
   const filteredTasks = tasks.filter((task) => {
-    if (filter === "completed") return task.status === "completed";
-    if (filter === "pending") return task.status === "pending";
+    if (filter === TaskStatus.Completed) return task.status === TaskStatus.Completed;
+    if (filter === TaskStatus.Pending) return task.status === TaskStatus.Pending;
     return true;
   });
 
@@ -27,10 +28,10 @@ const TaskList = ({ onEdit }) => {
       variant="TaskListColonHeaderMain"
       // className="grid grid-cols-4 bg-green-600 text-white font-bold p-2"
       >
-        <Div>Title</Div>
-        <Div>Description</Div>
-        <Div>Status</Div>
-        <Div>Actions</Div>
+         <span>Title</span>
+         <span>Description</span>
+         <span>Status</span>
+         <span>Actions</span>
       </Div>
 
       {/* 👈 Task items with scrolling */}
@@ -48,9 +49,9 @@ const TaskList = ({ onEdit }) => {
             variant ="TaskListTitleDiv"
             // className="font-semibold"
             >{task.title}</Div>
-            <Div>{task.description}</Div>
+            <span>{task.description}</span>
             <Div
-            variant={task.status === "completed" ? "GreenStatus" : "YellowStatus"}
+            variant={task.status === TaskStatus.Completed ? "GreenStatus" : "YellowStatus"}
               // className={
               //   task.status === "completed" ? "text-green-600" : "text-yellow-600"
               // }

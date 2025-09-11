@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button  from "@/components/atoms/Button.jsx";
 import Heading from "@/components/atoms/Heading";
 import Input from "@/components/atoms/Input";
+import Div from "@/components/atoms/Div";
 import Paragraph from "@/components/atoms/Paragraph";
 const RegisterPage = () => {
   const [email, setEmail] = useState("");

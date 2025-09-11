@@ -6,12 +6,12 @@ import Input from "@/components/atoms/Input";
 import TextArea from "@/components/atoms/TextArea";
 import Label from "@/components/atoms/Label";
 import Div from "@/components/atoms/Div";
-
+import { TaskStatus } from "@/enums/TaskStatus"; 
 
 const TaskForm = ({ editTask, setEditTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("pending"); // default
+  const [status, setStatus] = useState(TaskStatus.Pending); // default
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
 
@@ -39,7 +39,7 @@ const TaskForm = ({ editTask, setEditTask }) => {
     // Reset form
     setTitle("");
     setDescription("");
-    setStatus("pending");
+    setStatus(TaskStatus.Pending);
   };
 
   return (
@@ -69,18 +69,18 @@ const TaskForm = ({ editTask, setEditTask }) => {
         <Label>
           <Input
             type="radio"
-            value="pending"
-            checked={status === "pending"}
-            onChange={() => setStatus("pending")}
+            value= {TaskStatus.Pending}
+            checked={status === TaskStatus.Pending}
+            onChange={() => setStatus(TaskStatus.Pending)}
           />{" "}
           Pending
         </Label>
         <Label>
           <Input
             type="radio"
-            value="completed"
-            checked={status === "completed"}
-            onChange={() => setStatus("completed")}
+            value={TaskStatus.Completed}
+            checked={status === TaskStatus.Completed}
+            onChange={() => setStatus(TaskStatus.Completed)}
           />{" "}
           Completed
         </Label>

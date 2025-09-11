@@ -2,7 +2,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const LinkButton = ({ to, children, variant = "primary", ...props }) => {
   const baseStyles = ""; // you can add common styles if needed
 
   const variants = {
@@ -11,6 +10,11 @@ const LinkButton = ({ to, children, variant = "primary", ...props }) => {
     NavLogin: "px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white",
     NavRegister: "px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white",
   };
+
+
+
+const LinkButton = ({ to, children, variant = "primary", ...props }) => {
+
 
   return (
     <Link
