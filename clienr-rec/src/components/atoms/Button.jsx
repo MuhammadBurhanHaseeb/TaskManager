@@ -28,19 +28,11 @@ const baseStyles="";
 
 
 const Button = ({ children, variant = "primary", onClick, ...props }) => {
-//   const baseStyles =
-//     "rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
 
-
-//   const sizes = {
-//     sm: "px-3 py-1 text-sm",
-//     md: "px-4 py-2 text-base",
-//     lg: "px-6 py-3 text-lg",
-//   };
 
   return (
     <button
-      onClick={onClick} // 🔹 parent se function receive karega
+      onClick={onClick} // 🔹FunctionRecieved: parent se function receive karega
       className={`${baseStyles} ${variants[variant]} `}
       {...props}
     >

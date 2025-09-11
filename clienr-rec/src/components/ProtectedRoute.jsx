@@ -1,13 +1,17 @@
-// src/components/ProtectedRoute.jsx
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 
-export default function ProtectedRoute({ children }) {
+const ProtectedRoute = () => {
   const { token } = useSelector((state) => state.auth);
 
-  if (!token) {
-    return <Navigate to="/login" replace />; // redirect to login
+  // Agar token hai : -> user authenticated hai
+  if (token) {
+    return <Outlet />;  // Router Ke Andr:  yahan nested routes render hongi (Dashboard, Tasks)
   }
 
-  return children; // token valid → page render
-}
+  // Agar token nahi hai : -> redirect to login
+  return <Navigate to="/login" replace />;
+};
+
+export default ProtectedRoute;

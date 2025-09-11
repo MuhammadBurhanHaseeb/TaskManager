@@ -11,13 +11,14 @@ import '@/index.css';
 function App() {
   
   return (
-    <Router>
-      
+    <Router   >
       <Navbar />
       <div className="p-4">
         <Routes>
-          <Route path="/" element={ <ProtectedRoute> <Dashboard />  </ProtectedRoute> } />
-          <Route path="/tasks" element={  <ProtectedRoute> <Tasks />  </ProtectedRoute> } />
+        <Route  element={<ProtectedRoute/>} >
+          <Route path="/" element={ <Dashboard />} />
+          <Route path="/tasks" element={<Tasks />} />
+        </Route>
           <Route path="/login" element={<Login />} />
           <Route  element={<Layout />} />
           <Route path="/register" element={<Register />} />

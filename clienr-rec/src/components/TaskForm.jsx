@@ -11,11 +11,11 @@ import { TaskStatus } from "@/enums/TaskStatus";
 const TaskForm = ({ editTask, setEditTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(TaskStatus.Pending); // default
+  const [status, setStatus] = useState(TaskStatus.Pending); // InitalValue: default pending 
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
 
-  // Jab editTask aaye toh form pre-fill hoga
+  // FormFillAuto : Jab editTask aaye toh form pre-fill hoga
   useEffect(() => {
     if (editTask) {
       setTitle(editTask.title);
@@ -28,15 +28,15 @@ const TaskForm = ({ editTask, setEditTask }) => {
     e.preventDefault();
 
     if (editTask) {
-      // 🔹 Backend update call
+      // UpdateCall : 🔹 Backend update call
       dispatch(updateTask({ id: editTask.id, updates: { title, description, status }, token }));
       setEditTask(null); // reset edit mode
     } else {
-      // 🔹 Backend add call
+      // AddCall🔹 Backend add call
       dispatch(addTask({ title, description, status, token }));
     }
 
-    // Reset form
+    //  Reset form : After Update And Add Data
     setTitle("");
     setDescription("");
     setStatus(TaskStatus.Pending);
@@ -48,7 +48,6 @@ const TaskForm = ({ editTask, setEditTask }) => {
         type="text"
         placeholder="Title"
         variant="TaskFormInputsTitle"
-        // className="border p-2 rounded"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
@@ -58,7 +57,6 @@ const TaskForm = ({ editTask, setEditTask }) => {
         placeholder="Description"
         variant="TaskFormTextArea"
         rows = "2"
-        // className="border p-2 rounded"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
@@ -87,7 +85,6 @@ const TaskForm = ({ editTask, setEditTask }) => {
       </Div>
 
       <Button type="submit" 
-      // className="bg-blue-500 text-white px-4 py-2 rounded"
       variant="TaskAddUpdatetask"
       >
         {editTask ? "Update Task" : "Add Task"}

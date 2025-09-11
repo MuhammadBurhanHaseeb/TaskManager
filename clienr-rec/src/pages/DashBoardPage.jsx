@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "@/features/tasks/taskSlice";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/atoms/Card";
 import Paragraph from "@/components/atoms/Paragraph";
 import { TaskStatus } from "@/enums/TaskStatus"; 
 import { CheckCircle, Clock, ListTodo } from "lucide-react";
@@ -10,6 +10,8 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 import Heading from "@/components/atoms/Heading";
 import Div from "@/components/atoms/Div";
+
+const COLORS = ["#22c55e", "#eab308"]; // colors : green & yellow
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -22,55 +24,59 @@ const Dashboard = () => {
     }
   }, [token, dispatch]);
 
- // 🔹 useMemo for derived data
-  const completedTasks = useMemo(
-    () => tasks.filter((t) => t.status === TaskStatus.Completed),
-    [tasks]
-  );
+ // 🔹 Using Memo : useMemo for derived data
+  const { completedTasks, pendingTasks, recentTasks, chartData } = useMemo(() => {
+  const completed = [];
+  const pending = [];
+  const statusCount = {}; // DynamicCount:  store counts dynamically
 
-  const pendingTasks = useMemo(
-    () => tasks.filter((t) => t.status === TaskStatus.Pending),
-    [tasks]
-  );
+  for (const t of tasks) {
+  
+    statusCount[t.status] = (statusCount[t.status] || 0) + 1;
 
-  const recentTasks = useMemo(
-    () => [...tasks].slice(-5).reverse(),
-    [tasks]
-  );
+    if (t.status === TaskStatus.Completed) {
+      completed.push(t);
+    } else if (t.status === TaskStatus.Pending) {
+      pending.push(t);
+    }
+  }
 
-  const chartData = useMemo(
-    () => [
-      { name: TaskStatus.Completed, value: completedTasks.length },
-      { name: TaskStatus.Pending, value: pendingTasks.length },
-    ],
-    [completedTasks.length, pendingTasks.length]
-  );
+  const recent = [...tasks].slice(-5).reverse();
 
-  const COLORS = ["#22c55e", "#eab308"]; // green & yellow
+  // Dynamic Chart : build chartData dynamically from statusCount
+  const chart = Object.entries(statusCount).map(([status, value]) => ({
+    name: status,
+    value,
+  }));
+
+  return {
+    completedTasks: completed,
+    pendingTasks: pending,
+    recentTasks: recent,
+    chartData: chart,
+  };
+}, [tasks]);
+
+ 
 
   return (
     <Div 
     variant="MainContentDiv"
-    // className="p-6 space-y-8 max-w-6xl mx-auto"
     >
-     {/* <h1 className="text-3xl font-bold text-gray-800 text-center">📊 Dashboard</h1> */}
      <Heading  level={1} variant= "DashBoardHeading" > 📊 Dashboard</Heading>
 
 
       {/* ==== Stats Cards ==== */}
       <Div
       variant="MainContentInnerDiv"
-      // className="grid grid-cols-1 md:grid-cols-3 gap-6"
       >
-        <Card className="shadow-lg rounded-2xl bg-green-100">
-          <CardContent className="flex items-center p-6 gap-4">
+        <Card  variant="DashBoardCompletedTaskCard" >
+          <CardContent variant="DashBoardCompletedTaskCardContent">
             <CheckCircle className="text-green-600 w-10 h-10" />
             <Div>
-              {/* <h2 className="text-lg font-semibold">Completed Tasks</h2> */}
               <Heading  level={2} variant= "CompletePendingTotal" >Completed Tasks</Heading>
               <Paragraph 
               variant="CompletePara"
-              // className="text-2xl font-bold text-green-700"
               >
                 {completedTasks.length}
               </Paragraph>
@@ -78,15 +84,13 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="shadow-lg rounded-2xl bg-yellow-100">
-          <CardContent className="flex items-center p-6 gap-4">
+        <Card variant="DashBoardPendingTaskCard">
+          <CardContent variant ="DashBoardPendingTaskCardContent">
             <Clock className="text-yellow-600 w-10 h-10" />
             <Div>
-              {/* <h2 className="text-lg font-semibold">Pending Tasks</h2> */}
               <Heading  level={2} variant= "CompletePendingTotal" >Pending Tasks</Heading>
               <Paragraph 
               variant="PendingPara"
-              // className="text-2xl font-bold text-yellow-700"
               >
                 {pendingTasks.length}
               </Paragraph>
@@ -94,16 +98,14 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
-        <Card className="shadow-lg rounded-2xl bg-blue-100">
-          <CardContent className="flex items-center p-6 gap-4">
+        <Card variant="DashBoardTotalTaskCard">
+          <CardContent variant="DashBoardTotalTaskCardContent">
             <ListTodo className="text-blue-600 w-10 h-10" />
             <Div>
 
-              {/* <h2 className="text-lg font-semibold">Total Tasks</h2> */}
               <Heading  level={2} variant= "CompletePendingTotal" >Total Tasks</Heading>
               <Paragraph 
               variant="TotalPara"
-              // className="text-2xl font-bold text-blue-700"
               >
                 {tasks.length}
               </Paragraph>
@@ -115,9 +117,7 @@ const Dashboard = () => {
       {/* ==== Pie Chart Section ==== */}
       <Div
       variant="TaskDistributionMainDiv"
-      // className="bg-white shadow-lg rounded-2xl p-6"
       >
-        {/* <h2 className="text-xl font-bold mb-4">Task Distribution</h2> */}
         <Heading  level={2} variant= "TasDis" >Task Distribution</Heading>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
@@ -144,13 +144,10 @@ const Dashboard = () => {
       {/* ==== Recent Tasks ==== */}
       <Div 
       variant="RecentTaskMainDiv"
-      // className="bg-white shadow-lg rounded-2xl p-6"
       >
-        {/* <h2 className="text-xl font-bold mb-4">📝 Recent Tasks</h2> */}
          <Heading  level={2} variant= "TasDis" >📝 Recent Tasks</Heading>
         <Div
          variant="MainTableDiv" 
-          // className="overflow-x-auto"
           >
           <table className="w-full text-left border-collapse">
             <thead>

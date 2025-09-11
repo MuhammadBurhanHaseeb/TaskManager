@@ -18,7 +18,7 @@ import React from "react";
 
 
 const Heading = ({ children, level = 1, variant = "primary", className = "", ...props }) => {
-  const Tag = `h${level}`; // dynamically choose h1, h2, h3...
+  const Tag = `h${level}`; // LevelOfHeading :  dynamically choose h1, h2, h3...
 
 
   return (

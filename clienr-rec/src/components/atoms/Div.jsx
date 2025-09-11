@@ -1,7 +1,7 @@
 // src/components/atoms/Div.jsx
 import React from "react";
 
-  const baseClass = ""; // common styles for all divs
+  const baseClass = ""; //BaseStyle: common styles for all divs
 
   const variants = {
     TaskFormRadioDiv: "flex gap-4",

@@ -4,21 +4,20 @@ import { setFilter } from "@/features/tasks/taskSlice";
 import Button from "@/components/atoms/Button";
 import Div from "@/components/atoms/Div";
 import { TaskStatus } from "@/enums/TaskStatus"; 
-const FilterButtons = () => {
-  const dispatch = useDispatch();
-  const filter = useSelector((state) => state.tasks.filter);
 
-  //  const status = {
-  //   all: TaskStatus.All,
-  //   completed: TaskStatus.completed,
-  //   pending: TaskStatus.pending,
-  // }
+
+const FilterButtons = () => {
+  
+const dispatch = useDispatch();
+const filter = useSelector((state) => state.tasks.filter);
+  
+
+ 
 
 
   return (
     <Div 
     variant ="FillterBtnsDiv"
-    // className="flex gap-2 mb-4 mt-6"
     >
       <Button
          variant={filter === TaskStatus.All ? "FillterAll" : "FillterNotAll"}

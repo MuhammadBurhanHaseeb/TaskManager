@@ -12,9 +12,9 @@ const TaskPage = () => {
 
   // 🔹 Redux setup
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth); // token auth slice se aa raha hai
+  const { token } = useSelector((state) => state.auth); // Token : token auth slice se aa raha hai
 
-  // 🔹 Jab page load/refresh ho, tasks fetch karo
+  // 🔹 FetchingTasks : Jab page load/refresh ho, tasks fetch karo
   useEffect(() => {
     if (token) {
       dispatch(fetchTasks(token));
@@ -24,9 +24,7 @@ const TaskPage = () => {
   return (
     <Div  
     variant="TaskPageMainDiv"
-    // className="p-6 pt-26 max-w-3xl mx-auto"
     >
-      {/* <h1 className="text-3xl font-bold mb-4 text-center ">Tasks</h1> */}
       <Heading  level={1} variant= "Task" >Tasks</Heading>
       <TaskForm editTask={editTask} setEditTask={setEditTask} />
       <FilterButtons />

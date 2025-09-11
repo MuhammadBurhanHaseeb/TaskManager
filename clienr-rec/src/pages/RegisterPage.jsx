@@ -19,7 +19,7 @@ const RegisterPage = () => {
     dispatch(signupUser({ email, password }))
       .unwrap()
       .then(() => {
-        // ✅ Successful signup ke baad login page par bhej do
+        // ✅ Successful signup : Is ke baad login page par bhej do
         navigate("/login");
       })
       .catch((err) => {
@@ -30,9 +30,7 @@ const RegisterPage = () => {
   return (
     <Div
     variant="RegisterPageMainDiv"
-    // className="p-6 max-w-md mx-auto"
     >
-      {/* <h1 className="text-2xl font-bold mb-4">Register</h1> */}
       <Heading  level={1} variant= "registerLogin" >Register</Heading>
       <form onSubmit={handleRegister} className="flex flex-col gap-3">
         <Input
@@ -52,7 +50,6 @@ const RegisterPage = () => {
         <Button
           type="submit"
           disabled={loading}
-          // className="bg-green-500 text-white p-2 rounded"
           variant="RegisterButton"
         >
           {loading ? "Registering..." : "Register"}
@@ -60,7 +57,6 @@ const RegisterPage = () => {
       </form>
       {error && <Paragraph 
       variant ="Error"
-      // className="text-red-500 mt-2"
       >{error}</Paragraph>}
     </Div>
   );

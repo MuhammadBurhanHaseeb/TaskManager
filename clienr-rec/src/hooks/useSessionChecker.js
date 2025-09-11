@@ -23,7 +23,7 @@ export const useSessionChecker = () => {
           navigate("/login");
         }
       }
-    }, 60000); // har 60 sec check
+    }, 60000); //CheckingTime :  Every 60 sec check session 
 
     return () => clearInterval(interval);
   }, [dispatch, navigate]);

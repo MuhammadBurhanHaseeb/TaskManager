@@ -27,7 +27,7 @@ const Input = ({
 }) => {
  
 
-  // For radio and checkbox, render differently
+  //   For radio and checkbox Input :  render differently
   if (type === "radio" || type === "checkbox") {
     return (
       <label className="flex items-center gap-1 cursor-pointer">
@@ -45,7 +45,7 @@ const Input = ({
     );
   }
 
-  // Default input (text, email, password, etc.)
+  // Default input  : (text, email, password, etc.)
   return (
     <input
       type={type}

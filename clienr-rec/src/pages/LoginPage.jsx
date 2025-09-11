@@ -15,20 +15,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
 
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   dispatch(loginUser({ email, password }))
-  //     .unwrap()
-  //     .then((res) => { console.log(res);
-  //       // ✅ Login successful → redirect to tasks page
-  //       navigate("/");
-  //     })
-  //     .catch((err) => {
-  //       console.error("Login failed:", err);
-  //     });
-  // };
-
-
   const handleLogin = async (e) => {
   e.preventDefault();
 
@@ -36,7 +22,7 @@ const LoginPage = () => {
     const res = await dispatch(loginUser({ email, password })).unwrap();
     console.log(res);
 
-    // ✅ Login successful → redirect to tasks page
+    // ✅ Login successful:  → redirect to tasks page
     navigate("/");
   } catch (err) {
     console.error("Login failed:", err);
@@ -47,9 +33,7 @@ const LoginPage = () => {
   return (
     <Div
     variant="LoginPageMainDiv"
-    // className="p-6 max-w-md mx-auto"
     >
-      {/* <h1 className="text-2xl font-bold mb-4">Login</h1> */}
       <Heading  level={1} variant= "registerLogin" >Login</Heading>
       <form onSubmit={handleLogin} className="flex flex-col gap-3">
         <Input
@@ -69,7 +53,6 @@ const LoginPage = () => {
         <Button
           type="submit"
           disabled={loading}
-          // className="bg-green-500 text-white p-2 rounded"
           variant="LoginButton"
         >
           {loading ? "Logging in..." : "Login"}
@@ -77,7 +60,6 @@ const LoginPage = () => {
       </form>
       {error && <Paragraph
       variant="Error"
-      // className="text-red-500 mt-2"
       >{error}</Paragraph>}
     </Div>
   );

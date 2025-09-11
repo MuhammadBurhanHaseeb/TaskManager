@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-  const baseStyles = ""; // you can add common styles if needed
+  const baseStyles = ""; // BaseStyle : you can add common styles if needed
 
   const variants = {
     NavDashboard: "px-4 py-2 rounded-md hover:bg-green-700 transition-colors",

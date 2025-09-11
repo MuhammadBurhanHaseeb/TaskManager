@@ -6,38 +6,36 @@ import Button from "@/components/atoms/Button";
 import LinkButton from "@/components/atoms/LinkButton";
 import Heading from "@/components/atoms/Heading";
 import Div from "@/components/atoms/Div";
+
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(logoutUser()); // Redux se logout
-    navigate("/login"); // Login page per redirect
+    dispatch(logoutUser()); // Logout : Redux se logout
+    navigate("/login"); //Redirect : Login page per redirect after Logout 
   };
 
   return (
     <nav className="bg-green-600 fixed top-0 w-full z-50 shadow-md  text-white p-4 flex justify-between items-center">
-      {/* <h1 className="font-extrabold text-2xl tracking-wide">Task Manager</h1> */}
       <Heading  level={1} variant= "NavHead" >Task Manager</Heading>
 
       <Div 
       variant ="NavBarDiv"
-      // className="space-x-4 flex items-center"
       >
         {token ? (
           <>
             <LinkButton
               to="/"
               variant="NavDashboard"
-              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
             >
               Dashboard
             </LinkButton>
             <LinkButton
               to="/tasks"
               variant="NavTask"
-              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
             >
               Tasks
             </LinkButton>
@@ -45,7 +43,6 @@ const Navbar = () => {
             variant="NavLogout"
               onClick={handleLogout}
 
-              // className="px-4 py-2 rounded-md hover:bg-red-600 transition-colors border border-white"
             >
               Logout
             </Button>
@@ -55,14 +52,12 @@ const Navbar = () => {
             <LinkButton
               to="/login"
               variant ="NavLogin"
-              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white"
             >
               Login
             </LinkButton>
             <LinkButton
               to="/register"
               variant="NavRegister"
-              // className="px-4 py-2 rounded-md hover:bg-green-700 transition-colors border border-white"
             >
               Register
             </LinkButton>

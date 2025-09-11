@@ -21,12 +21,10 @@ const TaskList = ({ onEdit }) => {
   return (
     <Div 
     variant="TaskListMainDiv"
-    // className="border rounded overflow-hidden"
     >
       {/* 👈 Headers */}
       <Div 
       variant="TaskListColonHeaderMain"
-      // className="grid grid-cols-4 bg-green-600 text-white font-bold p-2"
       >
          <span>Title</span>
          <span>Description</span>
@@ -37,41 +35,32 @@ const TaskList = ({ onEdit }) => {
       {/* 👈 Task items with scrolling */}
       <Div 
       variant ="TaskListMainDivv" 
-      //  className="h-40 overflow-y-auto"
       >
         {filteredTasks.map((task) => (
           <Div
             key={task.id}
             variant ="TaskListInnerDiv"
-            // className="grid grid-cols-4 gap-2 p-2 border-b last:border-b-0 bg-white items-center"
           >
             <Div 
             variant ="TaskListTitleDiv"
-            // className="font-semibold"
             >{task.title}</Div>
             <span>{task.description}</span>
             <Div
             variant={task.status === TaskStatus.Completed ? "GreenStatus" : "YellowStatus"}
-              // className={
-              //   task.status === "completed" ? "text-green-600" : "text-yellow-600"
-              // }
             >
               {task.status}
             </Div>
             <Div 
             variant ="TaskListEditDeleteDiv"  
-            // className="flex gap-2"
             >
               <Button
                 onClick={() => onEdit(task)}
-                // className="bg-blue-500 text-white px-2 rounded"
                 variant="EditTasklist"
               >
                 Edit
               </Button>
               <Button
                 onClick={() => dispatch(deleteTask({ taskId: task.id, token }))}
-                // className="bg-red-500 text-white px-2 rounded"
                 variant="DeleteTasklist"
               >
                 Delete

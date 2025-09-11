@@ -1,6 +1,6 @@
 // src/components/atoms/Paragraph.jsx
 import React from "react";
-const baseClass = ""; // base text size and line height
+const baseClass = ""; //BaseStyle : base text size and line height
 
   const variants = {
     Error: "text-red-500 mt-2",
